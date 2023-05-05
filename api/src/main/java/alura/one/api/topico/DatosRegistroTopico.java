@@ -1,4 +1,20 @@
 package alura.one.api.topico;
 
-public record DatosRegistroTopico(String titulo, String mensaje, String fecha_creacion, Estatus estatus, Long id_usuario, Long id_curso) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record DatosRegistroTopico(
+        @NotBlank
+        String titulo,
+        @NotBlank
+        String mensaje,
+
+        //String fecha_creacion,
+        @NotNull
+        Estatus estatus,
+        @NotNull
+        Long id_usuario,
+        @NotNull
+        Long id_curso) {
+
 }
