@@ -83,4 +83,8 @@ public class Topico {
     public void prePersist() {
         fecha_creacion = LocalDateTime.now().toString();
     }
+
+    public void cambiarEstado() {
+        this.estatus = Estatus.valueOf("ELIMINADO");
+    }
 }
