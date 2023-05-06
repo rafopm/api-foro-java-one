@@ -2,12 +2,15 @@ package alura.one.api.topico;
 
 import alura.one.api.categoria.Categoria;
 import alura.one.api.curso.Curso;
+import alura.one.api.curso.CursoRepository;
 import alura.one.api.usuario.Usuario;
+import alura.one.api.usuario.UsuarioRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,6 +52,32 @@ public class Topico {
         this.usuario = usuario;
         this.curso = curso;
     }
+
+    public void actualizarDatos(DatosActualizarTopico datosActualizarTopico, Usuario usuario, Curso curso) {
+        if (datosActualizarTopico.titulo() != null) {
+            this.titulo = datosActualizarTopico.titulo();
+        }
+        if (datosActualizarTopico.mensaje() != null) {
+            this.mensaje = datosActualizarTopico.mensaje();
+        }
+        if (datosActualizarTopico.fecha_creacion() != null) {
+            this.fecha_creacion = datosActualizarTopico.fecha_creacion();
+        }
+
+        if (datosActualizarTopico.estatus() != null) {
+            this.estatus = datosActualizarTopico.estatus();
+        }
+
+        if (datosActualizarTopico.id_usuario() != null) {
+            this.usuario = usuario;
+        }
+
+        if (datosActualizarTopico.id_curso() != null) {
+            this.curso = curso;
+        }
+
+    }
+
 
     @PrePersist
     public void prePersist() {
