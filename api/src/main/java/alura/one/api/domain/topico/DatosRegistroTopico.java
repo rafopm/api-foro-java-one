@@ -1,4 +1,4 @@
-package alura.one.api.topico;
+package alura.one.api.domain.topico;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

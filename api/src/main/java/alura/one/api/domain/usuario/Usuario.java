@@ -1,6 +1,5 @@
-package alura.one.api.usuario;
+package alura.one.api.domain.usuario;
 
-import alura.one.api.topico.Estatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -37,6 +36,9 @@ public class Usuario {
         }
         if (datosActualizarUsuario.contrasena() != null) {
             this.contrasena = datosActualizarUsuario.contrasena();
+        }
+        if (datosActualizarUsuario.activo() != null) {
+            this.activo = datosActualizarUsuario.activo();
         }
     }
 

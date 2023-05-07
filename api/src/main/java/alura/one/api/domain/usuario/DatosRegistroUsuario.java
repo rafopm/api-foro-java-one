@@ -1,6 +1,7 @@
-package alura.one.api.usuario;
+package alura.one.api.domain.usuario;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record DatosRegistroUsuario(
         @NotBlank
@@ -9,7 +10,7 @@ public record DatosRegistroUsuario(
         String correo_electronico,
         @NotBlank
         String contrasena,
-        @NotBlank
+        @NotNull
         Boolean activo
 ) {
 }

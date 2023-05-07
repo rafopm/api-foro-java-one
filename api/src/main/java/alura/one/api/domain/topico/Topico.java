@@ -1,16 +1,13 @@
-package alura.one.api.topico;
+package alura.one.api.domain.topico;
 
-import alura.one.api.categoria.Categoria;
-import alura.one.api.curso.Curso;
-import alura.one.api.curso.CursoRepository;
-import alura.one.api.usuario.Usuario;
-import alura.one.api.usuario.UsuarioRepository;
+import alura.one.api.domain.categoria.Categoria;
+import alura.one.api.domain.curso.Curso;
+import alura.one.api.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;

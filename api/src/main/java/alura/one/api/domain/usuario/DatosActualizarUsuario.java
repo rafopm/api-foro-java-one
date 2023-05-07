@@ -1,4 +1,4 @@
-package alura.one.api.usuario;
+package alura.one.api.domain.usuario;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ public record DatosActualizarUsuario(
         String correo_electronico,
         @NotBlank
         String contrasena,
-        @NotBlank
+        @NotNull
         Boolean activo
 ) {
 }

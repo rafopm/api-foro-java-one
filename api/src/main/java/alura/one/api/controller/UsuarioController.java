@@ -1,14 +1,12 @@
 package alura.one.api.controller;
 
-import alura.one.api.curso.Curso;
-import alura.one.api.curso.CursoRepository;
-import alura.one.api.topico.*;
-import alura.one.api.usuario.*;
+import alura.one.api.domain.usuario.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +26,12 @@ public class UsuarioController {
     @GetMapping
     public Page<DatosListadoUsuario> listadoUsuario(@PageableDefault(size = 10) Pageable paginacion) {
         return usuarioRepository.findByActivoTrue(paginacion).map(DatosListadoUsuario::new);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detallarUsuario(@PathVariable Long id) {
+        var usuario = usuarioRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DatosDetallarUsuario(usuario));
     }
 
     @PutMapping

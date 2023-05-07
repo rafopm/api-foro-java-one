@@ -1,7 +1,4 @@
-package alura.one.api.topico;
-
-import alura.one.api.curso.Curso;
-import alura.one.api.usuario.Usuario;
+package alura.one.api.domain.topico;
 
 public record DatosListadoTopico(Long id_topico, String titulo, String mensaje, String fecha_creacion, Estatus estatus, String usuario_nombre, String curso_nombre) {
     public DatosListadoTopico(Topico topico) {

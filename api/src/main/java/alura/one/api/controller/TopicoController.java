@@ -1,22 +1,18 @@
 package alura.one.api.controller;
 
-import alura.one.api.curso.Curso;
-import alura.one.api.curso.CursoRepository;
-import alura.one.api.topico.*;
-import alura.one.api.usuario.Usuario;
-import alura.one.api.usuario.UsuarioRepository;
+import alura.one.api.domain.curso.Curso;
+import alura.one.api.domain.curso.CursoRepository;
+import alura.one.api.domain.topico.*;
+import alura.one.api.domain.usuario.Usuario;
+import alura.one.api.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")

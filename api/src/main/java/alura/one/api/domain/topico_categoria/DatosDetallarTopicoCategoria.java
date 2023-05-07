@@ -1,0 +1,10 @@
+package alura.one.api.domain.topico_categoria;
+
+import alura.one.api.domain.topico.Estatus;
+import alura.one.api.domain.topico.Topico;
+
+public record DatosDetallarTopicoCategoria(Long id_topico_categoria, String topico_titulo, String categoria_nombre) {
+    public DatosDetallarTopicoCategoria(TopicoCategoria topicoCategoria){
+        this(topicoCategoria.getId_topico_categoria(), topicoCategoria.getTopico().getTitulo(), topicoCategoria.getCategoria().getNombre());
+    }
+}

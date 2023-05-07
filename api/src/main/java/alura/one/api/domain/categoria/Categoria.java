@@ -1,6 +1,6 @@
-package alura.one.api.categoria;
+package alura.one.api.domain.categoria;
 
-import alura.one.api.topico.Topico;
+import alura.one.api.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

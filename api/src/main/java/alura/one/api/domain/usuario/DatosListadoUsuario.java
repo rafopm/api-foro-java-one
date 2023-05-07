@@ -1,4 +1,4 @@
-package alura.one.api.usuario;
+package alura.one.api.domain.usuario;
 
 public record DatosListadoUsuario(
         Long id_usuario,

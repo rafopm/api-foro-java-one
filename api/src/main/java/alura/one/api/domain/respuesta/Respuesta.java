@@ -1,7 +1,7 @@
-package alura.one.api.respuesta;
+package alura.one.api.domain.respuesta;
 
-import alura.one.api.topico.Topico;
-import alura.one.api.usuario.Usuario;
+import alura.one.api.domain.topico.Topico;
+import alura.one.api.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

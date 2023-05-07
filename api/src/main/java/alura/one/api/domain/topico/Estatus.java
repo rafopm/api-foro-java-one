@@ -1,4 +1,4 @@
-package alura.one.api.topico;
+package alura.one.api.domain.topico;
 
 public enum Estatus {
     ACTIVO,
