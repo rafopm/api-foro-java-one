@@ -13,7 +13,7 @@ public record DatosActualizarTopico(
 
     String fecha_creacion,
     @NotNull
-    Estatus estatus,
+        Estatus estatus,
     @NotNull
     Long id_usuario,
     @NotNull

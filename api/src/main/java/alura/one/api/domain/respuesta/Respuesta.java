@@ -1,5 +1,6 @@
 package alura.one.api.domain.respuesta;
 
+
 import alura.one.api.domain.topico.Topico;
 import alura.one.api.domain.usuario.Usuario;
 import jakarta.persistence.*;
@@ -19,8 +20,20 @@ public class Respuesta {
     private Long id_respuesta;
     private String mensaje;
     private String fecha_creacion;
+    @Enumerated(EnumType.STRING)
+    private Estatus estatus;
     @ManyToOne
-    private Usuario id_autor;
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
     @ManyToOne
-    private Topico id_topico;
+    @JoinColumn(name = "id_topico")
+    private Topico topico;
+
+    public Respuesta(DatosRegistroRespuesta datosRegistroRespuesta, Usuario usuario, Topico topico) {
+        this.mensaje = datosRegistroRespuesta.mensaje();
+        this.estatus = Estatus.valueOf("PENDIENTE");
+        this.usuario = usuario;
+        this.topico = topico;
+    }
+
 }
