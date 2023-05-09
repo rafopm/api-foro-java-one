@@ -47,16 +47,18 @@ public class RespuestaController {
         return ResponseEntity.ok(new DatosDetallarRespuesta(respuesta));
     }
 
-    /*
+
     @PutMapping
     @Transactional
-    public void actualizarTopico(@RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
-        Usuario usuario = usuarioRepository.findById(datosActualizarTopico.id_usuario()).orElseThrow();
-        Curso curso = cursoRepository.findById(datosActualizarTopico.id_curso()).orElseThrow();
-        Topico topico = topicoRepository.getReferenceById(datosActualizarTopico.id_topico());
-        topico.actualizarDatos(datosActualizarTopico, usuario, curso);
-    }
+    public void actualizarDatos(@RequestBody @Valid DatosActualizarRespuesta datosActualizarRespuesta) {
+        Usuario usuario = usuarioRepository.findById(datosActualizarRespuesta.id_usuario()).orElseThrow();
+        Topico topico = topicoRepository.findById(datosActualizarRespuesta.id_topico()).orElseThrow();
+        Respuesta respuesta = respuestaRepository.getReferenceById(datosActualizarRespuesta.id_topico());
+        System.out.println(datosActualizarRespuesta+" "+usuario+" "+topico);
+        respuesta.actualizarDatos(datosActualizarRespuesta, usuario, topico);
 
+    }
+/*
     @DeleteMapping("/{id}")
     @Transactional
     public void eliminarTopico(@PathVariable Long id) {

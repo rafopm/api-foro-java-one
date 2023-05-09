@@ -1,13 +1,11 @@
-package alura.one.api.domain.topico;
+package alura.one.api.domain.respuesta;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record DatosActualizarTopico(
+public record DatosActualizarRespuesta(
         @NotNull
-        Long id_topico,
-        @NotBlank
-        String titulo,
+        Long id_respuesta,
         @NotBlank
         String mensaje,
         @NotNull
@@ -17,6 +15,6 @@ public record DatosActualizarTopico(
         @NotNull
         Long id_usuario,
         @NotNull
-        Long id_curso) {
-
+        Long id_topico
+) {
 }
