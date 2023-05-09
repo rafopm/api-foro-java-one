@@ -9,9 +9,11 @@ public record DatosDetallarCurso(
         @NotBlank
         String nombre,
         @NotBlank
-        String descripcion
+        String descripcion,
+        @NotNull
+        boolean activo
 ) {
         public DatosDetallarCurso(Curso curso){
-                this(curso.getId_curso(), curso.getNombre(), curso.getDescripcion());
+                this(curso.getId_curso(), curso.getNombre(), curso.getDescripcion(), curso.getActivo());
         }
 }

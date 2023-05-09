@@ -18,10 +18,12 @@ public class Curso {
     private Long id_curso;
     private String nombre;
     private String descripcion;
+    private Boolean activo;
 
     public Curso(DatosRegistroCurso datosRegistroCurso) {
         this.nombre = datosRegistroCurso.nombre();
         this.descripcion = datosRegistroCurso.descripcion();
+        this.activo = true;
     }
 
     public void actualizarDatos(DatosActualizarCurso datosActualizarCurso) {
