@@ -50,21 +50,18 @@ public class RespuestaController {
 
     @PutMapping
     @Transactional
-    public void actualizarDatos(@RequestBody @Valid DatosActualizarRespuesta datosActualizarRespuesta) {
+    public void actualizarRespuesta(@RequestBody @Valid DatosActualizarRespuesta datosActualizarRespuesta) {
         Usuario usuario = usuarioRepository.findById(datosActualizarRespuesta.id_usuario()).orElseThrow();
         Topico topico = topicoRepository.findById(datosActualizarRespuesta.id_topico()).orElseThrow();
-        Respuesta respuesta = respuestaRepository.getReferenceById(datosActualizarRespuesta.id_topico());
-        System.out.println(datosActualizarRespuesta+" "+usuario+" "+topico);
+        Respuesta respuesta = respuestaRepository.getReferenceById(datosActualizarRespuesta.id_respuesta());
         respuesta.actualizarDatos(datosActualizarRespuesta, usuario, topico);
-
     }
-/*
+
     @DeleteMapping("/{id}")
     @Transactional
-    public void eliminarTopico(@PathVariable Long id) {
-        Topico topico = topicoRepository.getReferenceById(id);
-        topico.cambiarEstado();
+    public void eliminarRespuesta(@PathVariable Long id) {
+        Respuesta respuesta = respuestaRepository.getReferenceById(id);
+        respuesta.cambiarEstado();
     }
 
-     */
 }
