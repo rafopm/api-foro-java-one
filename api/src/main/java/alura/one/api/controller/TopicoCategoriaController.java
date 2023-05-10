@@ -56,8 +56,9 @@ public class TopicoCategoriaController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void eliminarTopicoCategoria(@PathVariable Long id) {
+    public ResponseEntity eliminarTopicoCategoria(@PathVariable Long id) {
         TopicoCategoria topicoCategoria = topicoCategoriaRepository.getReferenceById(id);
         topicoCategoriaRepository.delete(topicoCategoria);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -2,9 +2,7 @@ package alura.one.api.controller;
 
 import alura.one.api.domain.categoria.DatosRegistroCategoria;
 import alura.one.api.domain.categoria.Categoria;
-import alura.one.api.domain.categoria.DatosRegistroCategoria;
 import alura.one.api.domain.categoria.*;
-import alura.one.api.domain.topico_categoria.DatosDetallarTopicoCategoria;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +11,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/categorias")
@@ -22,34 +23,43 @@ public class CategoriaController {
     private CategoriaRepository categoriaRepository;
 
     @PostMapping
-    public void registrarCategoria(@RequestBody @Valid DatosRegistroCategoria datosRegistroCategoria) {
-        Categoria categoria = new Categoria(datosRegistroCategoria);
-        categoriaRepository.save(categoria);
+    public ResponseEntity<DatosRespuestaCategoria> registrarCategoria(@RequestBody @Valid DatosRegistroCategoria datosRegistroCategoria,
+                                             UriComponentsBuilder uriComponentsBuilder) {
+        Categoria categoria = categoriaRepository.save(new Categoria(datosRegistroCategoria));
+        DatosRespuestaCategoria datosRespuestaCategoria = new DatosRespuestaCategoria(categoria.getId_categoria(),
+                categoria.getNombre());
+
+        URI url = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId_categoria()).toUri();
+        return ResponseEntity.created(url).body(datosRespuestaCategoria);
     }
 
     @GetMapping
-    public Page<DatosListadoCategoria> listadoCategoria(@PageableDefault(size = 10) Pageable paginacion) {
-        return categoriaRepository.findAll(paginacion).map(DatosListadoCategoria::new);
+    public ResponseEntity<Page<DatosListadoCategoria>> listadoCategoria(@PageableDefault(size = 10) Pageable paginacion) {
+        return ResponseEntity.ok(categoriaRepository.findAll(paginacion).map(DatosListadoCategoria::new));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity detallarCategoria(@PathVariable Long id) {
-        var categoria = categoriaRepository.getReferenceById(id);
-        return ResponseEntity.ok(new DatosDetallarCategoria(categoria));
+    public ResponseEntity<DatosRespuestaCategoria> detallarCategoria(@PathVariable Long id) {
+        Categoria categoria = categoriaRepository.getReferenceById(id);
+        var datosMedico = new DatosRespuestaCategoria(categoria.getId_categoria(),
+                categoria.getNombre());
+        return ResponseEntity.ok(datosMedico);
     }
 
     @PutMapping
     @Transactional
-    public void actualizarCategoria(@RequestBody @Valid DatosActualizarCategoria datosActualizarCategoria) {
+    public ResponseEntity actualizarCategoria(@RequestBody @Valid DatosActualizarCategoria datosActualizarCategoria) {
         Categoria categoria = categoriaRepository.getReferenceById(datosActualizarCategoria.id_categoria());
         categoria.actualizarDatos(datosActualizarCategoria);
+        return ResponseEntity.ok(new DatosRespuestaCategoria(categoria.getId_categoria(), categoria.getNombre()));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void eliminarCategoria(@PathVariable Long id) {
+    public ResponseEntity eliminarCategoria(@PathVariable Long id) {
         Categoria categoria = categoriaRepository.getReferenceById(id);
         categoria.desactivarCategoria();
+        return ResponseEntity.noContent().build();
     }
 
 

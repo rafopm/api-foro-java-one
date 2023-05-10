@@ -1,5 +1,6 @@
 package alura.one.api.controller;
 
+import alura.one.api.domain.categoria.DatosRespuestaCategoria;
 import alura.one.api.domain.usuario.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,9 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void eliminarUsuario(@PathVariable Long id) {
+    public ResponseEntity eliminarUsuario(@PathVariable Long id) {
         Usuario usuario = usuarioRepository.getReferenceById(id);
         usuario.desactivarUsuario();
+        return ResponseEntity.noContent().build();
     }
 }

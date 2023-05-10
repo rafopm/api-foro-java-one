@@ -57,8 +57,9 @@ public class TopicoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void eliminarTopico(@PathVariable Long id) {
+    public ResponseEntity eliminarTopico(@PathVariable Long id) {
         Topico topico = topicoRepository.getReferenceById(id);
         topico.cambiarEstado();
+        return ResponseEntity.noContent().build();
     }
 }
