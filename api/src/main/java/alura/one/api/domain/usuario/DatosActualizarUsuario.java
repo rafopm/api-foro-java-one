@@ -9,7 +9,7 @@ public record DatosActualizarUsuario(
         @NotBlank
         String nombre,
         @NotBlank
-        String correo_electronico,
+        String email,
         @NotBlank
         String contrasena,
         @NotNull

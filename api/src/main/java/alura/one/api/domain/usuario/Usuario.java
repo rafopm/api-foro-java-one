@@ -16,14 +16,14 @@ public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_usuario;
     private String nombre;
-    private String correo_electronico;
+    private String email;
     private String contrasena;
     private Boolean activo;
 
     public Usuario(DatosRegistroUsuario datosRegistroUsuario) {
         this.activo = true;
         this.nombre = datosRegistroUsuario.nombre();
-        this.correo_electronico = datosRegistroUsuario.correo_electronico();
+        this.email = datosRegistroUsuario.email();
         this.contrasena = datosRegistroUsuario.contrasena();
     }
 
@@ -31,8 +31,8 @@ public class Usuario {
         if (datosActualizarUsuario.nombre() != null) {
             this.nombre = datosActualizarUsuario.nombre();
         }
-        if (datosActualizarUsuario.correo_electronico() != null) {
-            this.correo_electronico = datosActualizarUsuario.correo_electronico();
+        if (datosActualizarUsuario.email() != null) {
+            this.email = datosActualizarUsuario.email();
         }
         if (datosActualizarUsuario.contrasena() != null) {
             this.contrasena = datosActualizarUsuario.contrasena();
