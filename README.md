@@ -1,6 +1,6 @@
 # api-foro-java-one
 
-Dependencias:
+##Dependencias:
 Base:
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
