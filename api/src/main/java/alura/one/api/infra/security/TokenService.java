@@ -35,11 +35,13 @@ public class TokenService {
     }
 
     public String getSubject(String token){
+        if (token == null) {
+            throw new RuntimeException();
+        }
         DecodedJWT verifier = null;
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             verifier = JWT.require(algorithm)
-                    // specify an specific claim validations
                     .withIssuer("alura one")
                     .build()
                     .verify(token);
