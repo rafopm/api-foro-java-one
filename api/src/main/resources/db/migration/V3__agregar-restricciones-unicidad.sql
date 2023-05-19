@@ -8,6 +8,6 @@ ALTER TABLE cursos
     ADD CONSTRAINT unique_nombre UNIQUE (nombre);
 
 ALTER TABLE usuarios
-    ADD CONSTRAINT unique_correo_electronico UNIQUE (correo_electronico);
+    ADD CONSTRAINT unique_email UNIQUE (email);
 
 

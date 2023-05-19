@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DatosActualizarUsuario(
         @NotNull
-        Long id_usuario,
+        Long idusuario,
         @NotBlank
         String nombre,
         @NotBlank

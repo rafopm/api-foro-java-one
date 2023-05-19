@@ -1,13 +1,13 @@
-package alura.one.api.domain.topico_categoria;
+package alura.one.api.domain.topicocategoria;
 
 import jakarta.validation.constraints.NotNull;
 
 public record DatosActualizarTopicoCategoria(
         @NotNull
-        Long id_topico_categoria,
+        Long idtopicocategoria,
         @NotNull
-        Long id_topico,
+        Long idtopico,
         @NotNull
-        Long id_categoria
+        Long idcategoria
 ) {
 }

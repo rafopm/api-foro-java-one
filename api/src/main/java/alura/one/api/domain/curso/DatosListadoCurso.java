@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotNull;
 
 public record DatosListadoCurso(
         @NotNull
-        Long id_curso,
+        Long idcurso,
         @NotBlank
         String nombre,
         @NotBlank
         String descripcion
 ) {
         public DatosListadoCurso(Curso curso){
-                this(curso.getId_curso(), curso.getNombre(), curso.getDescripcion());
+                this(curso.getIdcurso(), curso.getNombre(), curso.getDescripcion());
         }
 }

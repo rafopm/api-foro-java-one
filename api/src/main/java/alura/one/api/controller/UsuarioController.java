@@ -26,7 +26,7 @@ public class UsuarioController {
         Usuario usuario = new Usuario(datosRegistroUsuario);
         usuarioRepository.save(usuario);
 
-        URI url = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId_usuario()).toUri();
+        URI url = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getIdusuario()).toUri();
         return ResponseEntity.created(url).body(new DatosDetallarUsuario(usuario));
     }
 
@@ -44,7 +44,7 @@ public class UsuarioController {
     @PutMapping
     @Transactional
     public ResponseEntity actualizarUsuario(@RequestBody @Valid DatosActualizarUsuario datosActualizarUsuario) {
-        Usuario usuario = usuarioRepository.getReferenceById(datosActualizarUsuario.id_usuario());
+        Usuario usuario = usuarioRepository.getReferenceById(datosActualizarUsuario.idusuario());
         usuario.actualizarDatos(datosActualizarUsuario);
         usuario = usuarioRepository.save(usuario);
         return ResponseEntity.ok(new DatosDetallarUsuario(usuario));

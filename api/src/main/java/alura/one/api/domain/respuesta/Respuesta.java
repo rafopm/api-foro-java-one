@@ -1,8 +1,6 @@
 package alura.one.api.domain.respuesta;
 
 
-import alura.one.api.domain.curso.Curso;
-import alura.one.api.domain.topico.DatosActualizarTopico;
 import alura.one.api.domain.topico.Topico;
 import alura.one.api.domain.usuario.Usuario;
 import jakarta.persistence.*;
@@ -18,20 +16,20 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id_respuesta")
+@EqualsAndHashCode(of = "idrespuesta")
 public class Respuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_respuesta;
+    private Long idrespuesta;
     private String mensaje;
-    private String fecha_creacion;
+    private String fechacreacion;
     @Enumerated(EnumType.STRING)
     private Estatus estatus;
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "idusuario")
     private Usuario usuario;
     @ManyToOne
-    @JoinColumn(name = "id_topico")
+    @JoinColumn(name = "idtopico")
     private Topico topico;
 
     public Respuesta(DatosRegistroRespuesta datosRegistroRespuesta, Usuario usuario, Topico topico) {
@@ -47,19 +45,19 @@ public class Respuesta {
             this.mensaje = datosActualizarRespuesta.mensaje();
         }
 
-        if (datosActualizarRespuesta.fecha_creacion() != null) {
-            this.fecha_creacion = datosActualizarRespuesta.fecha_creacion();
+        if (datosActualizarRespuesta.fechacreacion() != null) {
+            this.fechacreacion = datosActualizarRespuesta.fechacreacion();
         }
 
         if (datosActualizarRespuesta.estatus() != null) {
             this.estatus = datosActualizarRespuesta.estatus();
         }
 
-        if (datosActualizarRespuesta.id_usuario() != null) {
+        if (datosActualizarRespuesta.idusuario() != null) {
             this.usuario = usuario;
         }
 
-        if (datosActualizarRespuesta.id_topico() != null) {
+        if (datosActualizarRespuesta.idtopico() != null) {
             this.topico = topico;
         }
 
@@ -67,7 +65,7 @@ public class Respuesta {
 
     @PrePersist
     public void prePersist() {
-        fecha_creacion = LocalDateTime.now().toString();
+        fechacreacion = LocalDateTime.now().toString();
     }
 
     public void cambiarEstado() {

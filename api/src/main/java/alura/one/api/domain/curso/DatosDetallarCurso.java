@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DatosDetallarCurso(
         @NotNull
-        Long id_curso,
+        Long idcurso,
         @NotBlank
         String nombre,
         @NotBlank
@@ -14,6 +14,6 @@ public record DatosDetallarCurso(
         boolean activo
 ) {
         public DatosDetallarCurso(Curso curso){
-                this(curso.getId_curso(), curso.getNombre(), curso.getDescripcion(), curso.getActivo());
+                this(curso.getIdcurso(), curso.getNombre(), curso.getDescripcion(), curso.getActivo());
         }
 }

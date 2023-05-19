@@ -25,7 +25,7 @@ public class CursoController {
                                                              UriComponentsBuilder uriComponentsBuilder) {
         Curso curso = new Curso(datosRegistroCurso);
         curso = cursoRepository.save(curso);
-        URI url = uriComponentsBuilder.path("/cursos/{id}").buildAndExpand(curso.getId_curso()).toUri();
+        URI url = uriComponentsBuilder.path("/cursos/{id}").buildAndExpand(curso.getIdcurso()).toUri();
         return ResponseEntity.created(url).body(new DatosDetallarCurso(curso));
     }
 
@@ -43,7 +43,7 @@ public class CursoController {
     @PutMapping
     @Transactional
     public ResponseEntity actualizarCurso(@RequestBody @Valid DatosActualizarCurso datosActualizarCurso) {
-        Curso curso= cursoRepository.getReferenceById(datosActualizarCurso.id_curso());
+        Curso curso= cursoRepository.getReferenceById(datosActualizarCurso.idcurso());
         curso.actualizarDatos(datosActualizarCurso);
         curso = cursoRepository.save(curso);
         return ResponseEntity.ok(new DatosDetallarCurso(curso));

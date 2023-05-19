@@ -35,11 +35,11 @@ public class RespuestaController {
     @PostMapping
     public ResponseEntity<DatosDetallarRespuesta> registrarRespuesta(@RequestBody @Valid DatosRegistroRespuesta datosRegistroRespuesta,
                                                                      UriComponentsBuilder uriComponentsBuilder) {
-        Usuario usuario = usuarioRepository.findById(datosRegistroRespuesta.id_usuario()).orElseThrow();
-        Topico topico = topicoRepository.findById(datosRegistroRespuesta.id_topico()).orElseThrow();
+        Usuario usuario = usuarioRepository.findById(datosRegistroRespuesta.idusuario()).orElseThrow();
+        Topico topico = topicoRepository.findById(datosRegistroRespuesta.idtopico()).orElseThrow();
         Respuesta respuesta = new Respuesta(datosRegistroRespuesta, usuario, topico);
         respuesta = respuestaRepository.save(respuesta);
-        URI url = uriComponentsBuilder.path("/respuestas/{id}").buildAndExpand(respuesta.getId_respuesta()).toUri();
+        URI url = uriComponentsBuilder.path("/respuestas/{id}").buildAndExpand(respuesta.getIdrespuesta()).toUri();
         return ResponseEntity.created(url).body(new DatosDetallarRespuesta(respuesta));
     }
 
@@ -58,9 +58,9 @@ public class RespuestaController {
     @PutMapping
     @Transactional
     public ResponseEntity actualizarRespuesta(@RequestBody @Valid DatosActualizarRespuesta datosActualizarRespuesta) {
-        Usuario usuario = usuarioRepository.findById(datosActualizarRespuesta.id_usuario()).orElseThrow();
-        Topico topico = topicoRepository.findById(datosActualizarRespuesta.id_topico()).orElseThrow();
-        Respuesta respuesta = respuestaRepository.getReferenceById(datosActualizarRespuesta.id_respuesta());
+        Usuario usuario = usuarioRepository.findById(datosActualizarRespuesta.idusuario()).orElseThrow();
+        Topico topico = topicoRepository.findById(datosActualizarRespuesta.idtopico()).orElseThrow();
+        Respuesta respuesta = respuestaRepository.getReferenceById(datosActualizarRespuesta.idrespuesta());
         respuesta.actualizarDatos(datosActualizarRespuesta, usuario, topico);
         return ResponseEntity.ok(new DatosDetallarRespuesta(respuesta));
     }

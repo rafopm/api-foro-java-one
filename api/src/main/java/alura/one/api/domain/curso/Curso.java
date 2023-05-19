@@ -1,6 +1,5 @@
 package alura.one.api.domain.curso;
 
-import alura.one.api.domain.usuario.DatosRegistroUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -12,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of="id_curso")
+@EqualsAndHashCode(of="idcurso")
 public class Curso {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_curso;
+    private Long idcurso;
     private String nombre;
     private String descripcion;
     private Boolean activo;

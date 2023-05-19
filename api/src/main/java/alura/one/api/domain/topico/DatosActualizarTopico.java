@@ -5,18 +5,18 @@ import jakarta.validation.constraints.NotNull;
 
 public record DatosActualizarTopico(
         @NotNull
-        Long id_topico,
+        Long idtopico,
         @NotBlank
         String titulo,
         @NotBlank
         String mensaje,
         @NotNull
-        String fecha_creacion,
+        String fechacreacion,
         @NotNull
         Estatus estatus,
         @NotNull
-        Long id_usuario,
+        Long idusuario,
         @NotNull
-        Long id_curso) {
+        Long idcurso) {
 
 }

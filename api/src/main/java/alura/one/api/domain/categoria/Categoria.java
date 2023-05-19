@@ -1,6 +1,5 @@
 package alura.one.api.domain.categoria;
 
-import alura.one.api.domain.curso.DatosRegistroCurso;
 import alura.one.api.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,10 +14,10 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of="id_categoria")
+@EqualsAndHashCode(of="idcategoria")
 public class Categoria {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_categoria;
+    private Long idcategoria;
     private String nombre;
     private Boolean activo;
 

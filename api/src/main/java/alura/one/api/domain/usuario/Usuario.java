@@ -17,10 +17,10 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of="id_usuario")
+@EqualsAndHashCode(of="idusuario")
 public class Usuario implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_usuario;
+    private Long idusuario;
     private String nombre;
     private String email;
     private String contrasena;

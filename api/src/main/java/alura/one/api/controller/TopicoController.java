@@ -2,7 +2,6 @@ package alura.one.api.controller;
 
 import alura.one.api.domain.curso.Curso;
 import alura.one.api.domain.curso.CursoRepository;
-import alura.one.api.domain.respuesta.DatosDetallarRespuesta;
 import alura.one.api.domain.topico.*;
 import alura.one.api.domain.usuario.Usuario;
 import alura.one.api.domain.usuario.UsuarioRepository;
@@ -34,16 +33,16 @@ public class TopicoController {
     @PostMapping
     public ResponseEntity<DatosDetallarTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico,
                                                                UriComponentsBuilder uriComponentsBuilder) {
-        Usuario usuario = usuarioRepository.findById(datosRegistroTopico.id_usuario()).orElseThrow();
-        Curso curso = cursoRepository.findById(datosRegistroTopico.id_curso()).orElseThrow();
+        Usuario usuario = usuarioRepository.findById(datosRegistroTopico.idusuario()).orElseThrow();
+        Curso curso = cursoRepository.findById(datosRegistroTopico.idcurso()).orElseThrow();
         Topico topico = new Topico(datosRegistroTopico, usuario, curso);
         topicoRepository.save(topico);
-        URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId_topico()).toUri();
+        URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getIdtopico()).toUri();
         return ResponseEntity.created(url).body(new DatosDetallarTopico(topico));
     }
 
     @GetMapping
-    public ResponseEntity<Page<DatosListadoTopico>> listadoTopico(@PageableDefault(size = 10) Pageable paginacion) {
+    public ResponseEntity<Page<DatosListadoTopico>> listadoTopico(@PageableDefault(size = 3) Pageable paginacion) {
         return ResponseEntity.ok(topicoRepository.findAll(paginacion).map(DatosListadoTopico::new));
     }
 
@@ -56,9 +55,9 @@ public class TopicoController {
     @PutMapping
     @Transactional
     public ResponseEntity<DatosDetallarTopico> actualizarTopico(@RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
-        Usuario usuario = usuarioRepository.findById(datosActualizarTopico.id_usuario()).orElseThrow();
-        Curso curso = cursoRepository.findById(datosActualizarTopico.id_curso()).orElseThrow();
-        Topico topico = topicoRepository.findById(datosActualizarTopico.id_topico()).orElseThrow();
+        Usuario usuario = usuarioRepository.findById(datosActualizarTopico.idusuario()).orElseThrow();
+        Curso curso = cursoRepository.findById(datosActualizarTopico.idcurso()).orElseThrow();
+        Topico topico = topicoRepository.findById(datosActualizarTopico.idtopico()).orElseThrow();
 
         topico.actualizarDatos(datosActualizarTopico, usuario, curso);
         Topico topicoActualizado = topicoRepository.save(topico);

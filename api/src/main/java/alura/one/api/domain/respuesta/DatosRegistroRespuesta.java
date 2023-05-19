@@ -10,9 +10,9 @@ public record DatosRegistroRespuesta(
         @NotNull
         String estatus,
         @NotNull
-        Long id_usuario,
+        Long idusuario,
         @NotNull
-        Long id_topico
+        Long idtopico
 ) {
 }
 

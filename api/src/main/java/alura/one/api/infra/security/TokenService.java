@@ -2,13 +2,11 @@ package alura.one.api.infra.security;
 
 import alura.one.api.domain.usuario.Usuario;
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -26,7 +24,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("alura one")
                     .withSubject(usuario.getEmail())
-                    .withClaim("id", usuario.getId_usuario())
+                    .withClaim("id", usuario.getIdusuario())
                     .withExpiresAt(gererarFechaExpiracion())
                     .sign(algorithm);
         } catch (JWTCreationException exception){

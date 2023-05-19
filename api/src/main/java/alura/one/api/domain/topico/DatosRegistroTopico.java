@@ -13,8 +13,8 @@ public record DatosRegistroTopico(
         @NotNull
         Estatus estatus,
         @NotNull
-        Long id_usuario,
+        Long idusuario,
         @NotNull
-        Long id_curso) {
+        Long idcurso) {
 
 }

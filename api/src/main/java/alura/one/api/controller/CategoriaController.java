@@ -26,10 +26,10 @@ public class CategoriaController {
     public ResponseEntity<DatosRespuestaCategoria> registrarCategoria(@RequestBody @Valid DatosRegistroCategoria datosRegistroCategoria,
                                              UriComponentsBuilder uriComponentsBuilder) {
         Categoria categoria = categoriaRepository.save(new Categoria(datosRegistroCategoria));
-        DatosRespuestaCategoria datosRespuestaCategoria = new DatosRespuestaCategoria(categoria.getId_categoria(),
+        DatosRespuestaCategoria datosRespuestaCategoria = new DatosRespuestaCategoria(categoria.getIdcategoria(),
                 categoria.getNombre());
 
-        URI url = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId_categoria()).toUri();
+        URI url = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.getIdcategoria()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaCategoria);
     }
 
@@ -41,7 +41,7 @@ public class CategoriaController {
     @GetMapping("/{id}")
     public ResponseEntity<DatosRespuestaCategoria> detallarCategoria(@PathVariable Long id) {
         Categoria categoria = categoriaRepository.getReferenceById(id);
-        var datosMedico = new DatosRespuestaCategoria(categoria.getId_categoria(),
+        var datosMedico = new DatosRespuestaCategoria(categoria.getIdcategoria(),
                 categoria.getNombre());
         return ResponseEntity.ok(datosMedico);
     }
@@ -49,9 +49,9 @@ public class CategoriaController {
     @PutMapping
     @Transactional
     public ResponseEntity actualizarCategoria(@RequestBody @Valid DatosActualizarCategoria datosActualizarCategoria) {
-        Categoria categoria = categoriaRepository.getReferenceById(datosActualizarCategoria.id_categoria());
+        Categoria categoria = categoriaRepository.getReferenceById(datosActualizarCategoria.idcategoria());
         categoria.actualizarDatos(datosActualizarCategoria);
-        return ResponseEntity.ok(new DatosRespuestaCategoria(categoria.getId_categoria(), categoria.getNombre()));
+        return ResponseEntity.ok(new DatosRespuestaCategoria(categoria.getIdcategoria(), categoria.getNombre()));
     }
 
     @DeleteMapping("/{id}")

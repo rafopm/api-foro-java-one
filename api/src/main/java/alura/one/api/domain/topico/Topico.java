@@ -19,27 +19,28 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of="id_topico")
+@EqualsAndHashCode(of="idtopico")
 public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_topico;
+    @Column(name = "idtopico")
+    private Long idtopico;
     private String titulo;
     private String mensaje;
-    private String fecha_creacion;
+    private String fechacreacion;
     @Enumerated(EnumType.STRING)
     private Estatus estatus;
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "idusuario")
     private Usuario usuario;
     @ManyToOne
-    @JoinColumn(name = "id_curso")
+    @JoinColumn(name = "idcurso")
     private Curso curso;
 
     @ManyToMany
-    @JoinTable(name = "topicos_categorias",
-            joinColumns = @JoinColumn(name = "id_topico"),
-            inverseJoinColumns = @JoinColumn(name = "id_categoria"))
+    @JoinTable(name = "topicoscategorias",
+            joinColumns = @JoinColumn(name = "idtopico"),
+            inverseJoinColumns = @JoinColumn(name = "idcategoria"))
     private List<Categoria> categorias;
 
     public Topico(DatosRegistroTopico datosRegistroTopico, Usuario usuario, Curso curso) {
@@ -57,19 +58,19 @@ public class Topico {
         if (datosActualizarTopico.mensaje() != null) {
             this.mensaje = datosActualizarTopico.mensaje();
         }
-        if (datosActualizarTopico.fecha_creacion() != null) {
-            this.fecha_creacion = datosActualizarTopico.fecha_creacion();
+        if (datosActualizarTopico.fechacreacion() != null) {
+            this.fechacreacion = datosActualizarTopico.fechacreacion();
         }
 
         if (datosActualizarTopico.estatus() != null) {
             this.estatus = datosActualizarTopico.estatus();
         }
 
-        if (datosActualizarTopico.id_usuario() != null) {
+        if (datosActualizarTopico.idusuario() != null) {
             this.usuario = usuario;
         }
 
-        if (datosActualizarTopico.id_curso() != null) {
+        if (datosActualizarTopico.idcurso() != null) {
             this.curso = curso;
         }
 
@@ -78,7 +79,7 @@ public class Topico {
 
     @PrePersist
     public void prePersist() {
-        fecha_creacion = LocalDateTime.now().toString();
+        fechacreacion = LocalDateTime.now().toString();
     }
 
     public void cambiarEstado() {
