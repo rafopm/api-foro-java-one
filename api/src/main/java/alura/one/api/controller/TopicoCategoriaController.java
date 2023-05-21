@@ -68,7 +68,6 @@ public class TopicoCategoriaController {
             List<DatosDetallarTopicoCategoriaByTopico> response = topicoCategorias.stream()
                     .map(DatosDetallarTopicoCategoriaByTopico::new)
                     .collect(Collectors.toList());
-
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.notFound().build();

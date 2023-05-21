@@ -41,6 +41,13 @@ public class UsuarioController {
         return ResponseEntity.ok(new DatosDetallarUsuario(usuario));
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<DatosDetallarUsuario> detallarUsuarioEmail(@PathVariable String email) {
+        var usuario = usuarioRepository.findByEmailCustom(email);
+        return ResponseEntity.ok(new DatosDetallarUsuario(usuario));
+    }
+
+
     @PutMapping
     @Transactional
     public ResponseEntity actualizarUsuario(@RequestBody @Valid DatosActualizarUsuario datosActualizarUsuario) {

@@ -40,7 +40,6 @@ public class Respuesta {
     }
 
     public void actualizarDatos(DatosActualizarRespuesta datosActualizarRespuesta, Usuario usuario, Topico topico) {
-        System.out.println("IDDDD"+datosActualizarRespuesta+" "+usuario+" "+topico);
         if (datosActualizarRespuesta.mensaje() != null) {
             this.mensaje = datosActualizarRespuesta.mensaje();
         }

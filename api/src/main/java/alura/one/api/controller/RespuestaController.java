@@ -1,10 +1,8 @@
 package alura.one.api.controller;
 
-import alura.one.api.domain.curso.Curso;
-import alura.one.api.domain.curso.CursoRepository;
-import alura.one.api.domain.curso.DatosDetallarCurso;
 import alura.one.api.domain.respuesta.*;
-import alura.one.api.domain.topico.*;
+import alura.one.api.domain.topico.Topico;
+import alura.one.api.domain.topico.TopicoRepository;
 import alura.one.api.domain.usuario.Usuario;
 import alura.one.api.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/respuestas")
@@ -54,6 +54,21 @@ public class RespuestaController {
         return ResponseEntity.ok(new DatosDetallarRespuesta(respuesta));
     }
 
+    @GetMapping("/topico/{id}")
+    public ResponseEntity<List<DatosListadoRespuestaByTopico>> detallarRespuestaPorTopico(@PathVariable Long id) {
+        List<Respuesta> respuestas = respuestaRepository.findByTopico_Idtopico(id);
+
+        if (!respuestas.isEmpty()) {
+            List<DatosListadoRespuestaByTopico> response = respuestas.stream()
+                    .map(DatosListadoRespuestaByTopico::new)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+
+    }
 
     @PutMapping
     @Transactional
