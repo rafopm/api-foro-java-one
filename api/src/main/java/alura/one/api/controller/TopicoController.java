@@ -41,10 +41,33 @@ public class TopicoController {
         return ResponseEntity.created(url).body(new DatosDetallarTopico(topico));
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<Page<DatosListadoTopico>> listadoTopico(@PageableDefault(size = 10, sort = "fechacreacion", direction = Sort.Direction.DESC) Pageable paginacion) {
         return ResponseEntity.ok(topicoRepository.findAll(paginacion).map(DatosListadoTopico::new));
     }
+
+    @GetMapping("/resueltos")
+    public ResponseEntity<Page<DatosListadoTopico>> listadoTopicoResueltos(@PageableDefault(size = 10, sort = "fechacreacion", direction = Sort.Direction.DESC) Pageable paginacion) {
+        return ResponseEntity.ok(topicoRepository.findByEstatus(Estatus.RESUELTO, paginacion).map(DatosListadoTopico::new));
+    }
+
+    @GetMapping("/sinrespuesta")
+    public ResponseEntity<Page<DatosListadoTopicoSinrespuesta>> listadoTopicoSinrespuesta(@PageableDefault(size = 10, sort = "fechacreacion", direction = Sort.Direction.DESC) Pageable paginacion) {
+        Page<Topico> topicos = topicoRepository.findTopicosSinRespuesta(paginacion);
+
+        Page<DatosListadoTopicoSinrespuesta> datosListadoTopicoPage = topicos.map(topico -> new DatosListadoTopicoSinrespuesta(topico, false));
+
+        return ResponseEntity.ok(datosListadoTopicoPage);
+    }
+
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<Page<DatosListadoTopico>> listarTopicosPorCategoria(@PathVariable String categoria,
+                                                                              @PageableDefault(size = 10, sort = "fechacreacion", direction = Sort.Direction.DESC) Pageable paginacion) {
+        Page<Topico> topicos = topicoRepository.findByCategoriasNombre(categoria, paginacion);
+        Page<DatosListadoTopico> datosListadoTopicoPage = topicos.map(DatosListadoTopico::new);
+        return ResponseEntity.ok(datosListadoTopicoPage);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity detallarTopico(@PathVariable Long id) {

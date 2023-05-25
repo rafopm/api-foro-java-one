@@ -5,4 +5,8 @@ public record DatosListadoTopico(Long idtopico, String titulo, String mensaje, S
         this(topico.getIdtopico(), topico.getTitulo(), topico.getMensaje(), topico.getFechacreacion(), topico.getEstatus(),
                 topico.getUsuario().getNombre(), topico.getUsuario().getIdusuario(), topico.getCurso().getNombre());
     }
+
+    public Estatus getEstatus() {
+        return estatus;
+    }
 }
