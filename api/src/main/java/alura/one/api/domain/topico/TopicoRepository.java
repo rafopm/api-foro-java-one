@@ -15,5 +15,8 @@ public interface TopicoRepository extends JpaRepository<Topico, Long> {
 
     Page<Topico> findByEstatus(Estatus estatus, Pageable pageable);
 
-    Page<Topico> findByCategoriasNombre(String nombre, Pageable pageable);
+    Page<Topico> findByCategoriasIdcategoria(Long categoriaId, Pageable pageable);
+
+    Page<Topico> findByTituloContainingIgnoreCase(String titulo, Pageable paginacion);
+
 }

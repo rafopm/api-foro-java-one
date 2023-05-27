@@ -60,14 +60,23 @@ public class TopicoController {
         return ResponseEntity.ok(datosListadoTopicoPage);
     }
 
-    @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<Page<DatosListadoTopico>> listarTopicosPorCategoria(@PathVariable String categoria,
+    @GetMapping("/categoria/{categoriaId}")
+    public ResponseEntity<Page<DatosListadoTopico>> listarTopicosPorCategoria(@PathVariable Long categoriaId,
                                                                               @PageableDefault(size = 10, sort = "fechacreacion", direction = Sort.Direction.DESC) Pageable paginacion) {
-        Page<Topico> topicos = topicoRepository.findByCategoriasNombre(categoria, paginacion);
+        Page<Topico> topicos = topicoRepository.findByCategoriasIdcategoria(categoriaId, paginacion);
         Page<DatosListadoTopico> datosListadoTopicoPage = topicos.map(DatosListadoTopico::new);
         return ResponseEntity.ok(datosListadoTopicoPage);
     }
 
+    @GetMapping("/buscar/{palabras}")
+    public ResponseEntity<Page<DatosListadoTopico>> buscarTopicosPorTitulo(
+            @PathVariable("palabras") String palabras,
+            @PageableDefault(size = 10, sort = "fechacreacion", direction = Sort.Direction.DESC) Pageable paginacion) {
+
+        Page<Topico> topicos = topicoRepository.findByTituloContainingIgnoreCase(palabras, paginacion);
+        Page<DatosListadoTopico> datosListadoTopicoPage = topicos.map(DatosListadoTopico::new);
+        return ResponseEntity.ok(datosListadoTopicoPage);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity detallarTopico(@PathVariable Long id) {

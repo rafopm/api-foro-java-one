@@ -85,4 +85,5 @@ public class Topico {
     public void cambiarEstado() {
         this.estatus = Estatus.valueOf("ELIMINADO");
     }
+
 }
